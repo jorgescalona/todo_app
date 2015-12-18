@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<openerp>
+		<data noupdate="1">
+		<!-- noupdate="1" Esto significa que estos datos no serán actualizados en las actualizaciones del módulo.
+		esto será así mientras se esté desarrollando, por lo tanto es probable que quieras fijar noupdate="0" hasta
+		que estes seguro del archivo en desarrollo -->
+			<record>
+				<field name="name">ToDo tareas solo para dueños</field>
+				<field name="model.id" ref="model_todo_task"/>
+				<field name="domain_force">
+					[('create_uid','=','user_id')]
+				</field>
+				<!-- se define un campo o2m en donde la tupla (4,x) donde x es una referencia al grupo empleados
+				identificado por base.group_user-->
+				<field name="groups" eval="[(4,ref('base.group_user))]"></field>
+			</record>
+		</data>
+	</openerp>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<openerp>
+		<data>
+			<!-- Creacion de la vista formulario para todo.task -->
+			<record id="view_form_todo_task" model="ir.ui.view">
+				<field name="name">Forma Lista de Tareas</field>
+				<field name="model">todo.task</field>
+				<field name="arch" type="xml">
+				
+					<form string="Lista de Tareas MEGADETH">
+						<header>
+							<!-- Los botones van aqui -->
+							<button name="do_toggle_done" type="object" string="Marcar todo" class="oe_highligth" />
+							<button name="do_clear_done" type="object" string="Desmarcar todo" />
+						</header>
+						<sheet>
+							<group name="group_top">
+								<group name="group_left">
+									<field name="name"/>
+								</group>
+								<group name="group_rigth">
+									<field name="is_done"/>
+									<field name="active" readonly="1"/>	
+								</group>
+							</group>
+						</sheet>
+					</form>
+				</field>
+			</record>	
+			<!-- Agregando una vista de lista o arbol tree -->
+			<record id="view_tree_todo_task" model="ir.ui.view">
+				<field name="name">Vista arbol de la lista de tareas</field>
+				<field name="model">todo.task</field>
+				<field name="arch" type="xml">
+					<tree colors="gray:is_done==True">
+						<field name="name"/>
+						<field name="is_done"/>
+					</tree>
+				</field>
+			</record>
+			<!-- creacion de la vista de busquedas o search -->
+			<record id="view_filter_todo_task" model="ir.ui.view">
+				<field name="name">Vista busqueda de la lista de tareas</field>
+				<field name="model">todo.task</field>
+				<field name="arch" type="xml">
+					<search>
+						<field name="name"/>
+						<!-- los elementos filter son condiciones pre definidas usando sintaxis de dominio
+						      que pueden ser seleccionadas por el usuario mediante un clic -->
+						<filter string="Not Done" domain="[('is_done','=',False)]"/>
+						<filter string="Done" domain="[('is_done','!=',False)]" />
+					</search>
+				</field>
+			</record>
+			
+			<!-- Accion al abrir To-do Lista de tareas -->
+			<act_window
+				id="action_todo_task"
+				name="Lista de Tareas"
+				res_model="todo.task"
+				view_mode="tree,form"
+			/>
+			<!-- Menu Item para abrir la Lista de tareas -->
+			<menuitem
+				id="menu_todo_task"
+				name="Lista de tareas de @jorgemustaine"
+				parent="mail.mail_feeds"
+				sequence="20"
+				action="action_todo_task"
+			/>
+		</data>
+	</openerp>
