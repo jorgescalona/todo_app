@@ -3,7 +3,7 @@ from openerp import models, fields, api
 
 class TodoTask(models.Model):
 	_name = 'todo.task'
-	name = fields.Char('Descripcion', required=True)
+	name = fields.Char('Descripcion', required=True, help='¿Qué necesitas hacer?')
 	is_done = fields.Boolean('Done?')
 	active = fields.Boolean('Active?', default=True)
 	@api.one 
